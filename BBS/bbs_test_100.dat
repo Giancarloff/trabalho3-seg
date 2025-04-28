@@ -1,0 +1,12 @@
+Teste feito Mon Apr 28 20:51:05 2025.
+Size: 40, Average time: 1.2092ms for 100 numbers.
+Size: 56, Average time: 1.9241ms for 100 numbers.
+Size: 80, Average time: 2.5391ms for 100 numbers.
+Size: 128, Average time: 3.8885ms for 100 numbers.
+Size: 168, Average time: 5.1012ms for 100 numbers.
+Size: 224, Average time: 8.1187ms for 100 numbers.
+Size: 256, Average time: 8.2488ms for 100 numbers.
+Size: 512, Average time: 15.7246ms for 100 numbers.
+Size: 1024, Average time: 33.9121ms for 100 numbers.
+Size: 2048, Average time: 62.5732ms for 100 numbers.
+Size: 4096, Average time: 122.3771ms for 100 numbers.
