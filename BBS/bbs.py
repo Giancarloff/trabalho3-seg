@@ -30,13 +30,14 @@ class BBS:
             new_num_str += str(bit)
         
         return int(new_num_str, 2)
-    
+
+# Gerando uma população de números
 numbers: dict[int, list] = {}
 generation_times: dict[int, list] = {} 
 
-word_sizes = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
+word_sizes = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096] # Em bits
 
-num_amount = 100
+num_amount = 100 # Quantos gerar
 for size in word_sizes:
     numbers[size] = []
     generation_times[size] = []
