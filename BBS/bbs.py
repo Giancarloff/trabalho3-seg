@@ -31,54 +31,55 @@ class BBS:
         
         return int(new_num_str, 2)
 
-# Gerando uma população de números
-numbers: dict[int, list] = {}
-generation_times: dict[int, list] = {} 
+if __name__ == "__main__":
+    # Gerando uma população de números
+    numbers: dict[int, list] = {}
+    generation_times: dict[int, list] = {} 
 
-word_sizes = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096] # Em bits
+    word_sizes = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096] # Em bits
 
-num_amount = 100 # Quantos gerar
-for size in word_sizes:
-    numbers[size] = []
-    generation_times[size] = []
-    bbs = BBS(size)
-    for _ in range(num_amount):
-        start = time.time()
-        numbers[size].append(bbs.get())
-        end = time.time()
+    num_amount = 100 # Quantos gerar
+    for size in word_sizes:
+        numbers[size] = []
+        generation_times[size] = []
+        bbs = BBS(size)
+        for _ in range(num_amount):
+            start = time.time()
+            numbers[size].append(bbs.get())
+            end = time.time()
 
-        dt = (end - start) * 1000  # Converte para milisegundos
-        generation_times[size].append(dt) 
+            dt = (end - start) * 1000  # Converte para milisegundos
+            generation_times[size].append(dt) 
 
-# Estatísticas
-avg_time: dict[int, float] = {}
-stdev_time: dict[int, float] = {}
+    # Estatísticas
+    avg_time: dict[int, float] = {}
+    stdev_time: dict[int, float] = {}
 
-for size in word_sizes:
-    avg_time[size] = statistics.mean(generation_times[size])
-    stdev_time[size] = statistics.stdev(generation_times[size])
+    for size in word_sizes:
+        avg_time[size] = statistics.mean(generation_times[size])
+        stdev_time[size] = statistics.stdev(generation_times[size])
 
-now = time.asctime()
-print(f"Teste feito {now}.")
+    now = time.asctime()
+    print(f"Teste feito {now}.")
 
-for k, v in numbers.items():
-    print(f"Size: {k}, Average time: {avg_time[k]:.4f}ms for {num_amount} numbers.")
+    for k, v in numbers.items():
+        print(f"Size: {k}, Average time: {avg_time[k]:.4f}ms for {num_amount} numbers.")
 
-# Gerando um gráfico
-x = word_sizes
-y = [avg_time[size] for size in word_sizes]
-yerr = [stdev_time[size] for size in word_sizes]
+    # Gerando um gráfico
+    x = word_sizes
+    y = [avg_time[size] for size in word_sizes]
+    yerr = [stdev_time[size] for size in word_sizes]
 
-plt.figure(figsize=(10,6))
-plt.errorbar(x, y, yerr=yerr, fmt='o-', capsize=5, ecolor='red', markerfacecolor='blue', markersize=5)
+    plt.figure(figsize=(10,6))
+    plt.errorbar(x, y, yerr=yerr, fmt='o-', capsize=5, ecolor='red', markerfacecolor='blue', markersize=5)
 
-# Estilo
-plt.title("Tempo médio (ms) vs. Tamanho da palavra")
-plt.xlabel("Tamanho da palavra")
-plt.ylabel("Tempo médio (ms)")
-plt.grid(True)
-plt.xscale("log")
-plt.xticks(word_sizes, word_sizes, rotation=45)
-plt.tight_layout()
+    # Estilo
+    plt.title("Tempo médio (ms) vs. Tamanho da palavra")
+    plt.xlabel("Tamanho da palavra")
+    plt.ylabel("Tempo médio (ms)")
+    plt.grid(True)
+    plt.xscale("log")
+    plt.xticks(word_sizes, word_sizes, rotation=45)
+    plt.tight_layout()
 
-plt.savefig(f"bbs_plot ({now}).pdf")
+    plt.savefig(f"bbs_plot ({now}).pdf")
